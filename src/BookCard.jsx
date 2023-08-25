@@ -1,8 +1,16 @@
-function BookCard({ title, id, handleDelete }) {
+import { useState } from "react";
+
+function BookCard({ title, id, handleDelete, handleEdit }) {
+  const [toggle, setToggle] = useState(false);
+  const [newTitle, setTitle] = useState("");
+
+  function handleToggle() {
+    setToggle(true);
+  }
   return (
     <>
       <header>
-        <button>✏</button>
+        <button onClick={handleToggle}>✏</button>
         <button onClick={() => handleDelete(id)}>❌</button>
       </header>
       <main>
@@ -11,6 +19,17 @@ function BookCard({ title, id, handleDelete }) {
         </article>
         <article>
           <p>{title}</p>
+          {toggle && (
+            <>
+              <h1>Title</h1>
+              <input
+                type="text"
+                value={newTitle}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <button onClick={handleEdit(id, newTitle)}>Save</button>
+            </>
+          )}
         </article>
       </main>
     </>

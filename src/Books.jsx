@@ -1,5 +1,5 @@
 import BookCard from "./BookCard";
-function Books({ books, handleDelete }) {
+function Books({ books, handleDelete, handleEdit }) {
   return (
     <>
       {books.map((book, index) => (
@@ -7,6 +7,7 @@ function Books({ books, handleDelete }) {
           <BookCard
             title={book.title}
             handleDelete={handleDelete}
+            handleEdit={handleEdit}
             id={book.id}
           />
         </span>

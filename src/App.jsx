@@ -11,14 +11,23 @@ function App() {
     setBooks([...books, newBook]);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, newTitle) => {
     const modifiedBooks = books.filter((book) => book.id != id);
     setBooks([...modifiedBooks]);
   };
+
+  const handleEdit = (id) => {
+    const editTitle = books.map((book) => book.id === id);
+  };
+
   return (
     <>
       <BooksForum handleBooks={handleBooks} />
-      <Books books={books} handleDelete={handleDelete} />
+      <Books
+        books={books}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </>
   );
 }
