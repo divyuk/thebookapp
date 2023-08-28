@@ -11,13 +11,19 @@ function App() {
     setBooks([...books, newBook]);
   };
 
-  const handleDelete = (id, newTitle) => {
+  const handleDelete = (id) => {
     const modifiedBooks = books.filter((book) => book.id != id);
-    setBooks([...modifiedBooks]);
+    setBooks(modifiedBooks);
   };
 
-  const handleEdit = (id) => {
-    const editTitle = books.map((book) => book.id === id);
+  const handleEdit = (id, newTitle) => {
+    const updatedBooks = books.map((book) => {
+      if (book.id === id) {
+        return { ...book, title: newTitle }; // Update the title of the specific book
+      }
+      return book; // Keep other books unchanged
+    });
+    setBooks(updatedBooks);
   };
 
   return (

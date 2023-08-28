@@ -7,6 +7,11 @@ function BookCard({ title, id, handleDelete, handleEdit }) {
   function handleToggle() {
     setToggle(true);
   }
+
+  function handleSave() {
+    handleEdit(id, newTitle);
+    setToggle(false);
+  }
   return (
     <>
       <header>
@@ -21,13 +26,13 @@ function BookCard({ title, id, handleDelete, handleEdit }) {
           <p>{title}</p>
           {toggle && (
             <>
-              <h1>Title</h1>
+              <p>Title</p>
               <input
                 type="text"
                 value={newTitle}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <button onClick={handleEdit(id, newTitle)}>Save</button>
+              <button onClick={handleSave}>Save</button>
             </>
           )}
         </article>
