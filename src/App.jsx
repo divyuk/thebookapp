@@ -33,18 +33,22 @@ function App() {
     setBooks([...books, response.data]);
   };
 
-  const handleDelete = (id) => {
-    fetch(`http://localhost:3000/books?${id}`, {
-      method: "DELETE",
-    });
+  const handleDelete = async (id) => {
+    // fetch(`http://localhost:3000/books?${id}`, {
+    //   method: "DELETE",
+    // });
+    await axios.delete(`http://localhost:3000/books/${id}`);
     const modifiedBooks = books.filter((book) => book.id != id);
     setBooks(modifiedBooks);
   };
 
-  const handleEdit = (id, newTitle) => {
+  const handleEdit = async (id, newTitle) => {
+    const resp = await axios.put(`http://localhost:3000/books/${id}`, {
+      title: newTitle,
+    });
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
-        return { ...book, title: newTitle }; // Update the title of the specific book
+        return { ...book, ...resp.data }; // Update the title of the specific book
       }
       return book; // Keep other books unchanged
     });
