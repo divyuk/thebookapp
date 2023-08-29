@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import BooksForum from "./BooksForum";
 import { v4 as uuidv4 } from "uuid";
@@ -16,6 +16,15 @@ function App() {
   //   };
   //   fetchData();
   // }, []);
+
+  // Side Effect using axios for initial loading of the component.
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await axios.get("http://localhost:3000/books");
+      setBooks(resp.data);
+    };
+    fetchData();
+  }, []);
 
   const handleBooks = async (book) => {
     const newBook = { id: uuidv4(), title: book };
