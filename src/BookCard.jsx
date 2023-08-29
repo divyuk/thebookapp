@@ -20,10 +20,13 @@ function BookCard({ title, id, handleDelete, handleEdit }) {
       </header>
       <main>
         <article>
-          <img src="../public/vite.svg" alt="Book Image" />
+          <img
+            src={`https://picsum.photos/seed/${title}/200/200`}
+            alt="Book Image"
+          />
         </article>
         <article>
-          <p>{title}</p>
+          {!toggle && <p>{title}</p>}
           {toggle && (
             <>
               <p>Title</p>
@@ -31,6 +34,7 @@ function BookCard({ title, id, handleDelete, handleEdit }) {
                 type="text"
                 value={newTitle}
                 onChange={(e) => setTitle(e.target.value)}
+                placeholder={title}
               />
               <button onClick={handleSave}>Save</button>
             </>

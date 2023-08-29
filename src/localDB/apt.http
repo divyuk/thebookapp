@@ -1,0 +1,12 @@
+GET http://127.0.0.1:3000/books HTTP/1.1 
+Content-Type: application/json
+
+###
+
+
+POST http://127.0.0.1:3000/books HTTP/1.1 
+Content-Type: application/json
+ 
+{
+    "title": "GOT"
+}

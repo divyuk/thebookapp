@@ -1,17 +1,33 @@
 import { useState } from "react";
-
+import axios from "axios";
 import BooksForum from "./BooksForum";
 import { v4 as uuidv4 } from "uuid";
 import Books from "./Books";
 
 function App() {
   const [books, setBooks] = useState([]);
-  const handleBooks = (book) => {
+
+  // Side Effect for fetching the data for initial loading of the comp.
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("http://localhost:3000/books");
+  //     const data = await response.json();
+  //     setBooks(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const handleBooks = async (book) => {
     const newBook = { id: uuidv4(), title: book };
-    setBooks([...books, newBook]);
+    const response = await axios.post("http://localhost:3000/books", newBook);
+    console.log(response);
+    setBooks([...books, response.data]);
   };
 
   const handleDelete = (id) => {
+    fetch(`http://localhost:3000/books?${id}`, {
+      method: "DELETE",
+    });
     const modifiedBooks = books.filter((book) => book.id != id);
     setBooks(modifiedBooks);
   };
