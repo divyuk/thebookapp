@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import BooksContext from "./context/Books";
 
-function BookCard({ title, id, handleDelete, handleEdit }) {
+function BookCard({ title, id }) {
   const [toggle, setToggle] = useState(false);
   const [newTitle, setTitle] = useState("");
-
+  const { handleDelete, handleEdit } = useContext(BooksContext);
   function handleToggle() {
     setToggle(true);
   }
